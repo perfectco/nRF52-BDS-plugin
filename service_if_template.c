@@ -60,7 +60,7 @@ if (enriched.jobsForUser != '') {
 
 <%
 _.each(Services, function (service) { %>
-ble_<%= service.ShortName %>_t    m_<%= service.UniqueName %>; <%
+static ble_<%= service.ShortName %>_t    m_<%= service.UniqueName %>; <%
 }); %>
 <%
 _.each(Services, function (service) {
