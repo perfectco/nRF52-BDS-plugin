@@ -548,7 +548,7 @@ uint32_t ble_<%= ShortName %>_init(ble_<%= ShortName %>_t * p_<%= ShortName %>, 
     <%
         if (!_.isNull(FullUuid)) { vsUUIDCounter++; %>
     // Add a custom base UUID.
-    ble_uuid128_t bds_base_uuid = {{<%= FullUuid.UuidBase %>}};
+    ble_uuid128_t bds_base_uuid = {BLE_<%= ShortName.toUpperCase() %>_BASE_UUID};
     uint8_t       uuid_type;
     err_code = sd_ble_uuid_vs_add(&bds_base_uuid, &uuid_type);
     if (err_code != NRF_SUCCESS)
@@ -558,7 +558,7 @@ uint32_t ble_<%= ShortName %>_init(ble_<%= ShortName %>_t * p_<%= ShortName %>, 
     ble_uuid.type = uuid_type;
     ble_uuid.uuid = <%= FullUuid.Uuid %>;
     p_<%= ShortName %>->uuid.type = uuid_type;
-    p_<%= ShortName %>->uuid.uuid = <%= FullUuid.Uuid %>;<%
+    p_<%= ShortName %>->uuid.uuid = BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID;<%
         } else { %>
     BLE_UUID_BLE_ASSIGN(ble_uuid, 0x<%= UUID %>);<%
         }%>

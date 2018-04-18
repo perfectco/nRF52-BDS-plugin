@@ -49,6 +49,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "char_enc_dec.h"
 
 <%
+if (!_.isNull(FullUuid)) { %>
+#define BLE_<%= ShortName.toUpperCase() %>_BASE_UUID ({<%= FullUuid.UuidBase %>})
+#define BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID (<%= FullUuid.Uuid %>)<%
+} else {%>
+#define BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID (<%= UUID %>)<%
+}%>
+
+<%
 if(ErrorCodes.length > 0) { %>
 // Error codes <%
     _.each(ErrorCodes, function(errCode) { %>
