@@ -556,7 +556,9 @@ uint32_t ble_<%= ShortName %>_init(ble_<%= ShortName %>_t * p_<%= ShortName %>, 
         return err_code;
     }
     ble_uuid.type = uuid_type;
-    ble_uuid.uuid = <%= FullUuid.Uuid %>;<%
+    ble_uuid.uuid = <%= FullUuid.Uuid %>;
+    p_<%= ShortName %>->ble_uuid.type = uuid_type;
+    p_<%= ShortName %>->ble_uuid.uuid = <%= FullUuid.Uuid %>;<%
         } else { %>
     BLE_UUID_BLE_ASSIGN(ble_uuid, 0x<%= UUID %>);<%
         }%>

@@ -231,6 +231,10 @@ _.each(Characteristics, function(characteristic) {
     }});
 }); %>
     uint16_t conn_handle; /**< Handle of the current connection (as provided by the BLE stack, is BLE_CONN_HANDLE_INVALID if not in a connection). */
+    <%
+        if (!_.isNull(FullUuid)) { %>
+    uint8_t uuid_type; /* type of UUID for the base service UUID */<%
+        }%>
 };
 
 /**@brief Function for initializing the <%= Name %>.
