@@ -1,0 +1,267 @@
+/*
+Copyright (c) 2017, Nordic Semiconductor ASA
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form, except as embedded into a Nordic
+   Semiconductor ASA integrated circuit in a product or a software update for
+   such product, must reproduce the above copyright notice, this list of
+   conditions and the following disclaimer in the documentation and/or other
+   materials provided with the distribution.
+
+3. Neither the name of Nordic Semiconductor ASA nor the names of its
+   contributors may be used to endorse or promote products derived from this
+   software without specific prior written permission.
+
+4. This software, with or without modification, must only be used with a
+   Nordic Semiconductor ASA integrated circuit.
+
+5. Any software provided in binary form under this license must not be reverse
+   engineered, decompiled, modified and/or disassembled.
+
+THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
+OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL NORDIC SEMICONDUCTOR ASA OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+{
+
+	"dumpDataAlways" : false,
+	"readDumpData" : false,
+
+	"commentWordWrapLength" : 120,
+	
+	"arrayLengthMaxDefine" : 16,
+	"repeatedCountMaxDefine" : 4,
+	
+	"dependencies" :
+	{
+		"bds_bool"   : [ "bitOperations" ],
+		"bds_2bit"   : [ "bitOperations", "ble_bool" ],
+		"bds_4bit"   : [ "bitOperations", "ble_bool" ],
+		"bds_12bit"  : [ "bitOperations", "ble_bool" ],
+		"bds_40bit"  : [ "ble_32bit", "ble_8bit" ],
+		"bds_48bit"  : [ "ble_32bit", "ble_16bit" ],
+		"bds_64bit"  : [ "ble_32bit" ],
+		"bds_float"  : [ "ble_32bit" ],
+		"bds_double" : [ "ble_64bit" ],
+	},
+
+	"formatInformation" :
+	{
+		"boolean"            : { ctype : "bool",     carr : "",  handler : "bds_bool",       byValue : true,  default : "$$ = false;"  },
+		"2bit"               : { ctype : "uint8_t",  carr : "",  handler : "bds_2bit",       byValue : true,  default : "$$ = 0;"  },
+		"4bit"               : { ctype : "uint8_t",  carr : "",  handler : "bds_4bit",       byValue : true,  default : "$$ = 0;"  },
+		"nibble"             : { ctype : "uint8_t",  carr : "",  handler : "bds_4bit",       byValue : true,  default : "$$ = 0;"  },
+		"8bit"               : { ctype : "uint8_t",  carr : "",  handler : "bds_8bit",       byValue : true,  default : "$$ = 0;"  },
+		"16bit"              : { ctype : "uint16_t", carr : "",  handler : "bds_16bit",      byValue : true,  default : "$$ = 0;"  },
+		"24bit"              : { ctype : "uint32_t", carr : "",  handler : "bds_24bit",      byValue : true,  default : "$$ = 0;"  },
+		"32bit"              : { ctype : "uint32_t", carr : "",  handler : "bds_32bit",      byValue : true,  default : "$$ = 0;"  },
+		"uint8"              : { ctype : "uint8_t",  carr : "",  handler : "bds_8bit",       byValue : true,  default : "$$ = 0;"  },
+		"uint8[]"            : { ctype : "uint8_t",  carr : "*", handler : "bds_8bit_array", byValue : false, default : "$$[0] = 0; \n $$_length = 1;" },
+		"uint12"             : { ctype : "uint16_t", carr : "",  handler : "bds_12bit",      byValue : true,  default : "$$ = 0;"  },
+		"uint16"             : { ctype : "uint16_t", carr : "",  handler : "bds_16bit",      byValue : true,  default : "$$ = 0;"  },
+		"uint24"             : { ctype : "uint32_t", carr : "",  handler : "bds_24bit",      byValue : true,  default : "$$ = 0;"  },
+		"uint32"             : { ctype : "uint32_t", carr : "",  handler : "bds_32bit",      byValue : true,  default : "$$ = 0;"  },
+		"uint40"             : { ctype : "uint64_t", carr : "",  handler : "bds_40bit",      byValue : true,  default : "$$ = 0;"  },
+		"uint48"             : { ctype : "uint64_t", carr : "",  handler : "bds_48bit",      byValue : true,  default : "$$ = 0;"  },
+		"uint64"             : { ctype : "uint64_t", carr : "",  handler : "bds_64bit",      byValue : true,  default : "$$ = 0;"  },
+		"uint128"            : { ctype : "uint8_t",  carr : 16,  handler : "bds_8bit_array", byValue : false, default : "memset($$, 0, 16);"  },
+		"sint8"              : { ctype : "int8_t",   carr : "",  handler : "bds_8bit",       byValue : true,  default : "$$ = 0;"  },
+		"sint12"             : { ctype : "int16_t",  carr : "",  handler : "bds_s12bit",     byValue : true,  default : "$$ = 0;"  },
+		"sint16"             : { ctype : "int16_t",  carr : "",  handler : "bds_16bit",      byValue : true,  default : "$$ = 0;"  },
+		"sint24"             : { ctype : "int32_t",  carr : "",  handler : "bds_s24bit",     byValue : true,  default : "$$ = 0;"  },
+		"sint32"             : { ctype : "int32_t",  carr : "",  handler : "bds_32bit",      byValue : true,  default : "$$ = 0;"  },
+		"sint48"             : { ctype : "int64_t",  carr : "",  handler : "bds_s48bit",     byValue : true,  default : "$$ = 0;"  },
+		"sint64"             : { ctype : "int64_t",  carr : "",  handler : "bds_64bit",      byValue : true,  default : "$$ = 0;"  },
+		"sint128"            : { ctype : "uint8_t",  carr : 16,  handler : "bds_8bit_array", byValue : false, default : "memset($$, 0, 16);"  },
+		"float32"            : { ctype : "float",    carr : "",  handler : "bds_float",      byValue : true,  default : "$$ = 0.0f;"  },
+		"float64"            : { ctype : "double",   carr : "",  handler : "bds_double",     byValue : true,  default : "$$ = 0.0;"  },
+		"utf8s"              : { ctype : "char",     carr : "$", handler : "bds_utf8",       byValue : true,  default : "strcpy($$, \"Example\");" },
+		"utf16s"             : { ctype : "uint16_t", carr : "$", handler : "bds_utf16",      byValue : true,  default : "memcpy($$, \"E\\0\"\"x\\0\"\"a\\0\"\"m\\0\"\"p\\0\"\"l\\0\"\"e\\0\\0\", 16);" },
+		"characteristic"     : { ctype : "uint8_t",  carr : "*", handler : "bds_8bit_array", byValue : false, default : "$$[0] = 0; \n $$_length = 1;" },
+		"struct"             : { ctype : "uint8_t",  carr : "*", handler : "bds_8bit_array", byValue : false, default : "$$[0] = 0; \n $$_length = 1;" },
+		"gatt_uuid"          : { ctype : "uint8_t",  carr : 16,  handler : "bds_8bit_array", byValue : false, default : "memset($$, 0, 16);"  },
+		"variable"           : { ctype : "uint8_t",  carr : "*", handler : "bds_8bit_array", byValue : false, default : "$$[0] = 0; \n $$_length = 1;" },
+		"reg-cert-data-list" : { ctype : "uint8_t",  carr : "*", handler : "bds_8bit_array", byValue : false, default : "$$[0] = 0; \n $$_length = 1;" },
+		"SFLOAT"             : { ctype : "bds_ieee11073sfloat_t",  carr : "", handler : "bds_ieee11073sfloat",  byValue : false, default: "$$.mantissa = 0; \n $$.exponent = 0;" },
+		"FLOAT"              : { ctype : "bds_ieee11073float_t",   carr : "", handler : "bds_ieee11073float",   byValue : false, default: "$$.mantissa = 0; \n $$.exponent = 0;" },
+		"duint16"            : { ctype : "bds_ieee20601duint16_t", carr : "", handler : "bds_ieee20601duint16", byValue : false, default: "$$.value = 0;" },
+	},
+	
+	"units" :
+	{
+		"org.bluetooth.unit.unitless"                                               : { id : "0x2700", name : "" },
+		"org.bluetooth.unit.length.metre"                                           : { id : "0x2701", name : "length (metre)" },
+		"org.bluetooth.unit.mass.kilogram"                                          : { id : "0x2702", name : "mass (kilogram)" },
+		"org.bluetooth.unit.time.second"                                            : { id : "0x2703", name : "time (second)" },
+		"org.bluetooth.unit.electric_current.ampere"                                : { id : "0x2704", name : "electric current (ampere)" },
+		"org.bluetooth.unit.thermodynamic_temperature.kelvin"                       : { id : "0x2705", name : "thermodynamic temperature (kelvin)" },
+		"org.bluetooth.unit.amount_of_substance.mole"                               : { id : "0x2706", name : "amount of substance (mole)" },
+		"org.bluetooth.unit.luminous_intensity.candela"                             : { id : "0x2707", name : "luminous intensity (candela)" },
+		"org.bluetooth.unit.area.square_metres"                                     : { id : "0x2710", name : "area (square metres)" },
+		"org.bluetooth.unit.volume.cubic_metres"                                    : { id : "0x2711", name : "volume (cubic metres)" },
+		"org.bluetooth.unit.velocity.metres_per_second"                             : { id : "0x2712", name : "velocity (metres per second)" },
+		"org.bluetooth.unit.acceleration.metres_per_second_squared"                 : { id : "0x2713", name : "acceleration (metres per second squared)" },
+		"org.bluetooth.unit.wavenumber.reciprocal_metre"                            : { id : "0x2714", name : "wavenumber (reciprocal metre)" },
+		"org.bluetooth.unit.density.kilogram_per_cubic_metre"                       : { id : "0x2715", name : "density (kilogram per cubic metre)" },
+		"org.bluetooth.unit.surface_density.kilogram_per_square_metre"              : { id : "0x2716", name : "surface density (kilogram per square metre)" },
+		"org.bluetooth.unit.specific_volume.cubic_metre_per_kilogram"               : { id : "0x2717", name : "specific volume (cubic metre per kilogram)" },
+		"org.bluetooth.unit.current_density.ampere_per_square_metre"                : { id : "0x2718", name : "current density (ampere per square metre)" },
+		"org.bluetooth.unit.magnetic_field_strength.ampere_per_metre"               : { id : "0x2719", name : "magnetic field strength (ampere per metre)" },
+		"org.bluetooth.unit.amount_concentration.mole_per_cubic_metre"              : { id : "0x271A", name : "amount concentration (mole per cubic metre)" },
+		"org.bluetooth.unit.mass_concentration.kilogram_per_cubic_metre"            : { id : "0x271B", name : "mass concentration (kilogram per cubic metre)" },
+		"org.bluetooth.unit.luminance.candela_per_square_metre"                     : { id : "0x271C", name : "luminance (candela per square metre)" },
+		"org.bluetooth.unit.refractive_index"                                       : { id : "0x271D", name : "refractive index" },
+		"org.bluetooth.unit.relative_permeability"                                  : { id : "0x271E", name : "relative permeability" },
+		"org.bluetooth.unit.plane_angle.radian"                                     : { id : "0x2720", name : "plane angle (radian)" },
+		"org.bluetooth.unit.solid_angle.steradian"                                  : { id : "0x2721", name : "solid angle (steradian)" },
+		"org.bluetooth.unit.frequency.hertz"                                        : { id : "0x2722", name : "frequency (hertz)" },
+		"org.bluetooth.unit.force.newton"                                           : { id : "0x2723", name : "force (newton)" },
+		"org.bluetooth.unit.pressure.pascal"                                        : { id : "0x2724", name : "pressure (pascal)" },
+		"org.bluetooth.unit.energy.joule"                                           : { id : "0x2725", name : "energy (joule)" },
+		"org.bluetooth.unit.power.watt"                                             : { id : "0x2726", name : "power (watt)" },
+		"org.bluetooth.unit.electric_charge.coulomb"                                : { id : "0x2727", name : "electric charge (coulomb)" },
+		"org.bluetooth.unit.electric_potential_difference.volt"                     : { id : "0x2728", name : "electric potential difference (volt)" },
+		"org.bluetooth.unit.capacitance.farad"                                      : { id : "0x2729", name : "capacitance (farad)" },
+		"org.bluetooth.unit.electric_resistance.ohm"                                : { id : "0x272A", name : "electric resistance (ohm)" },
+		"org.bluetooth.unit.electric_conductance.siemens"                           : { id : "0x272B", name : "electric conductance (siemens)" },
+		"org.bluetooth.unit.magnetic_flux.weber"                                    : { id : "0x272C", name : "magnetic flux (weber)" },
+		"org.bluetooth.unit.magnetic_flux_density.tesla"                            : { id : "0x272D", name : "magnetic flux density (tesla)" },
+		"org.bluetooth.unit.inductance.henry"                                       : { id : "0x272E", name : "inductance (henry)" },
+		"org.bluetooth.unit.thermodynamic_temperature.degree_celsius"               : { id : "0x272F", name : "Celsius temperature (degree Celsius)" },
+		"org.bluetooth.unit.luminous_flux.lumen"                                    : { id : "0x2730", name : "luminous flux (lumen)" },
+		"org.bluetooth.unit.illuminance.lux"                                        : { id : "0x2731", name : "illuminance (lux)" },
+		"org.bluetooth.unit.activity_referred_to_a_radionuclide.becquerel"          : { id : "0x2732", name : "activity referred to a radionuclide (becquerel)" },
+		"org.bluetooth.unit.absorbed_dose.gray"                                     : { id : "0x2733", name : "absorbed dose (gray)" },
+		"org.bluetooth.unit.dose_equivalent.sievert"                                : { id : "0x2734", name : "dose equivalent (sievert)" },
+		"org.bluetooth.unit.catalytic_activity.katal"                               : { id : "0x2735", name : "catalytic activity (katal)" },
+		"org.bluetooth.unit.dynamic_viscosity.pascal_second"                        : { id : "0x2740", name : "dynamic viscosity (pascal second)" },
+		"org.bluetooth.unit.moment_of_force.newton_metre"                           : { id : "0x2741", name : "moment of force (newton metre)" },
+		"org.bluetooth.unit.surface_tension.newton_per_metre"                       : { id : "0x2742", name : "surface tension (newton per metre)" },
+		"org.bluetooth.unit.angular_velocity.radian_per_second"                     : { id : "0x2743", name : "angular velocity (radian per second)" },
+		"org.bluetooth.unit.angular_acceleration.radian_per_second_squared"         : { id : "0x2744", name : "angular acceleration (radian per second squared)" },
+		"org.bluetooth.unit.heat_flux_density.watt_per_square_metre"                : { id : "0x2745", name : "heat flux density (watt per square metre)" },
+		"org.bluetooth.unit.heat_capacity.joule_per_kelvin"                         : { id : "0x2746", name : "heat capacity (joule per kelvin)" },
+		"org.bluetooth.unit.specific_heat_capacity.joule_per_kilogram_kelvin"       : { id : "0x2747", name : "specific heat capacity (joule per kilogram kelvin)" },
+		"org.bluetooth.unit.specific_energy.joule_per_kilogram"                     : { id : "0x2748", name : "specific energy (joule per kilogram)" },
+		"org.bluetooth.unit.thermal_conductivity.watt_per_metre_kelvin"             : { id : "0x2749", name : "thermal conductivity (watt per metre kelvin)" },
+		"org.bluetooth.unit.energy_density.joule_per_cubic_metre"                   : { id : "0x274A", name : "energy density (joule per cubic metre)" },
+		"org.bluetooth.unit.electric_field_strength.volt_per_metre"                 : { id : "0x274B", name : "electric field strength (volt per metre)" },
+		"org.bluetooth.unit.electric_charge_density.coulomb_per_cubic_metre"        : { id : "0x274C", name : "electric charge density (coulomb per cubic metre)" },
+		"org.bluetooth.unit.surface_charge_density.coulomb_per_square_metre"        : { id : "0x274D", name : "surface charge density (coulomb per square metre)" },
+		"org.bluetooth.unit.electric_flux_density.coulomb_per_square_metre"         : { id : "0x274E", name : "electric flux density (coulomb per square metre)" },
+		"org.bluetooth.unit.permittivity.farad_per_metre"                           : { id : "0x274F", name : "permittivity (farad per metre)" },
+		"org.bluetooth.unit.permeability.henry_per_metre"                           : { id : "0x2750", name : "permeability (henry per metre)" },
+		"org.bluetooth.unit.molar_energy.joule_per_mole"                            : { id : "0x2751", name : "molar energy (joule per mole)" },
+		"org.bluetooth.unit.molar_entropy.joule_per_mole_kelvin"                    : { id : "0x2752", name : "molar entropy (joule per mole kelvin)" },
+		"org.bluetooth.unit.exposure.coulomb_per_kilogram"                          : { id : "0x2753", name : "exposure (coulomb per kilogram)" },
+		"org.bluetooth.unit.absorbed_dose_rate.gray_per_second"                     : { id : "0x2754", name : "absorbed dose rate (gray per second)" },
+		"org.bluetooth.unit.radiant_intensity.watt_per_steradian"                   : { id : "0x2755", name : "radiant intensity (watt per steradian)" },
+		"org.bluetooth.unit.radiance.watt_per_square_metre_steradian"               : { id : "0x2756", name : "radiance (watt per square metre steradian)" },
+		"org.bluetooth.unit.catalytic_activity_concentration.katal_per_cubic_metre" : { id : "0x2757", name : "catalytic activity concentration (katal per cubic metre)" },
+		"org.bluetooth.unit.time.minute"                                            : { id : "0x2760", name : "time (minute)" },
+		"org.bluetooth.unit.time.hour"                                              : { id : "0x2761", name : "time (hour)" },
+		"org.bluetooth.unit.time.day"                                               : { id : "0x2762", name : "time (day)" },
+		"org.bluetooth.unit.plane_angle.degree"                                     : { id : "0x2763", name : "plane angle (degree)" },
+		"org.bluetooth.unit.plane_angle.minute"                                     : { id : "0x2764", name : "plane angle (minute)" },
+		"org.bluetooth.unit.plane_angle.second"                                     : { id : "0x2765", name : "plane angle (second)" },
+		"org.bluetooth.unit.area.hectare"                                           : { id : "0x2766", name : "area (hectare)" },
+		"org.bluetooth.unit.volume.litre"                                           : { id : "0x2767", name : "volume (litre)" },
+		"org.bluetooth.unit.mass.tonne"                                             : { id : "0x2768", name : "mass (tonne)" },
+		"org.bluetooth.unit.pressure.bar"                                           : { id : "0x2780", name : "pressure (bar)" },
+		"org.bluetooth.unit.pressure.millimetre_of_mercury"                         : { id : "0x2781", name : "pressure (millimetre of mercury)" },
+		"org.bluetooth.unit.length.ngstrm"                                          : { id : "0x2782", name : "length (ngstrm)" },
+		"org.bluetooth.unit.length.nautical_mile"                                   : { id : "0x2783", name : "length (nautical mile)" },
+		"org.bluetooth.unit.area.barn"                                              : { id : "0x2784", name : "area (barn)" },
+		"org.bluetooth.unit.velocity.knot"                                          : { id : "0x2785", name : "velocity (knot)" },
+		"org.bluetooth.unit.logarithmic_radio_quantity.neper"                       : { id : "0x2786", name : "logarithmic radio quantity (neper)" },
+		"org.bluetooth.unit.logarithmic_radio_quantity.bel"                         : { id : "0x2787", name : "logarithmic radio quantity (bel)" },
+		"org.bluetooth.unit.length.yard"                                            : { id : "0x27A0", name : "length (yard)" },
+		"org.bluetooth.unit.length.parsec"                                          : { id : "0x27A1", name : "length (parsec)" },
+		"org.bluetooth.unit.length.inch"                                            : { id : "0x27A2", name : "length (inch)" },
+		"org.bluetooth.unit.length.foot"                                            : { id : "0x27A3", name : "length (foot)" },
+		"org.bluetooth.unit.length.mile"                                            : { id : "0x27A4", name : "length (mile)" },
+		"org.bluetooth.unit.pressure.pound_force_per_square_inch"                   : { id : "0x27A5", name : "pressure (pound-force per square inch)" },
+		"org.bluetooth.unit.velocity.kilometre_per_hour"                            : { id : "0x27A6", name : "velocity (kilometre per hour)" },
+		"org.bluetooth.unit.velocity.mile_per_hour"                                 : { id : "0x27A7", name : "velocity (mile per hour)" },
+		"org.bluetooth.unit.angular_velocity.revolution_per_minute"                 : { id : "0x27A8", name : "angular velocity (revolution per minute)" },
+		"org.bluetooth.unit.energy.gram_calorie"                                    : { id : "0x27A9", name : "energy (gram calorie)" },
+		"org.bluetooth.unit.energy.kilogram_calorie"                                : { id : "0x27AA", name : "energy (kilogram calorie)" },
+		"org.bluetooth.unit.energy.kilowatt_hour"                                   : { id : "0x27AB", name : "energy (kilowatt hour)" },
+		"org.bluetooth.unit.thermodynamic_temperature.degree_fahrenheit"            : { id : "0x27AC", name : "thermodynamic temperature (degree Fahrenheit)" },
+		"org.bluetooth.unit.percentage"                                             : { id : "0x27AD", name : "percentage" },
+		"org.bluetooth.unit.per_mille"                                              : { id : "0x27AE", name : "per mille" },
+		"org.bluetooth.unit.period.beats_per_minute"                                : { id : "0x27AF", name : "period (beats per minute)" },
+		"org.bluetooth.unit.electric_charge.ampere_hours"                           : { id : "0x27B0", name : "electric charge (ampere hours)" },
+		"org.bluetooth.unit.mass_density.milligram_per_decilitre"                   : { id : "0x27B1", name : "mass density (milligram per decilitre)" },
+		"org.bluetooth.unit.mass_density.millimole_per_litre"                       : { id : "0x27B2", name : "mass density (millimole per litre)" },
+		"org.bluetooth.unit.time.year"                                              : { id : "0x27B3", name : "time (year)" },
+		"org.bluetooth.unit.time.month"                                             : { id : "0x27B4", name : "time (month)" },
+		"org.bluetooth.unit.concentration.count_per_cubic_metre"                    : { id : "0x27B5", name : "concentration (count per cubic metre)" },
+		"org.bluetooth.unit.irradiance.watt_per_square_metre"                       : { id : "0x27B6", name : "irradiance (watt per square metre)" },
+		"org.bluetooth.unit.transfer_rate.milliliter_per_kilogram_per_minute"       : { id : "0x27B7", name : "milliliter (per kilogram per minute)" },
+		"org.bluetooth.unit.mass.pound"                                             : { id : "0x27B8", name : "mass (pound)" }
+	},
+
+	"shortNames" :
+	{
+		"alert notification" : "ans",
+		"automation io" : "aios",
+		"battery" : "bas",
+		"blood pressure" : "bls",
+		"body composition" : "bcs",
+		"bond management" : "bms",
+		"continuous glucose monitoring" : "cgms",
+		"current time" : "cts",
+		"cycling power" : "cps",
+		"cycling speed and cadence" : "cscs",
+		"device information" : "dis",
+		"environmental sensing" : "ess",
+		"fitness machine" : "ftms",
+		"generic access" : "gaccs",
+		"generic attribute" : "gatts",
+		"glucose" : "gls",
+		"health thermometer" : "hts",
+		"heart rate" : "hrs",
+		"hid" : "hids",
+		"http proxy" : "hps",
+		"human interface device" : "hids",
+		"immediate alert" : "ias",
+		"indoor positioning" : "ips",
+		"internet protocol support" : "ipss",
+		"link loss" : "lls",
+		"location and navigation" : "lns",
+		"next dst change" : "ndcs",
+		"object transfer" : "ots",
+		"phone alert status" : "pass",
+		"pulse oximeter" : "plxs",
+		"reference time update" : "rtus",
+		"running speed and cadence" : "rscs",
+		"scan parameters" : "scps",
+		"transport discovery" : "tds",
+		"tx power" : "tps",
+		"user data" : "uds",
+		"weight scale" : "wss"
+	},
+	
+	"reservedNames":
+	[
+		"auto", "else", "long", "switch", "break", "enum", "register", "typedef", "case", "extern", "return", "union", "char", "float",
+		"short", "unsigned", "const", "for", "signed", "void", "continue", "goto", "sizeof", "volatile", "default", "if", "static",
+		"while", "do", "int", "struct", "double"
+	]
+}
