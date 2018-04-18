@@ -112,7 +112,7 @@ function generateFiles(jsondata) {
 
     // Generate template-to-generated-code interface files
     log("Generating SDK template project interface files...");
-    data = createInterfaceHeaderFile();
+    data = createInterfaceHeaderFile(jsondata);
     FileManager.CreateFile("service_if.h", data);
 
     data = createInterfaceCodeFile(jsondata);
@@ -584,11 +584,11 @@ function createCodeFile(service) {
  * Creates header file for template-to-generated-code interface (static file)
  * @return {string} headerFile
  */
-function createInterfaceHeaderFile() {
+function createInterfaceHeaderFile(profile) {
     log("Generating header file service_if.h");
     var template = FileManager.ReadFile('service_if_template.h');
     var compiled = _.template(template);
-    var data = compiled();
+    var data = compiled(profile);
     return data;
 }
 
