@@ -556,7 +556,7 @@ uint32_t ble_<%= ShortName %>_init(ble_<%= ShortName %>_t * p_<%= ShortName %>, 
         return err_code;
     }
     ble_uuid.type = uuid_type;
-    ble_uuid.uuid = <%= FullUuid.Uuid %>;
+    ble_uuid.uuid = BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID;
     p_<%= ShortName %>->uuid.type = uuid_type;
     p_<%= ShortName %>->uuid.uuid = BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID;<%
         } else { %>
@@ -598,11 +598,11 @@ uint32_t ble_<%= ShortName %>_init(ble_<%= ShortName %>_t * p_<%= ShortName %>, 
     uint8_t <%= characteristic.NormalizedName() %>_encoded_value[MAX_<%= characteristic.NormalizedName().toUpperCase() %>_LEN];
     ble_add_char_params_t add_<%= characteristic.NormalizedName() %>_params;
     memset(&add_<%= characteristic.NormalizedName() %>_params, 0, sizeof(add_<%= characteristic.NormalizedName() %>_params));
+    add_<%= characteristic.NormalizedName() %>_params.uuid                = BLE_<%= ShortName.toUpperCase() %>_<%= characteristic.NormalizedName().toUpperCase() %>_CHAR_UUID; 
     <%
     if(_.isNull(characteristic.getFullUuid())) { %>
-    add_<%= characteristic.NormalizedName() %>_params.uuid                = 0x<%= characteristic.UUID %>; <%
+    <%
     } else { %>
-    add_<%= characteristic.NormalizedName() %>_params.uuid                = <%= characteristic.getFullUuid().Uuid %>;
     add_<%= characteristic.NormalizedName() %>_params.uuid_type           = ble_uuid.type; <%
     } %>
     add_<%= characteristic.NormalizedName() %>_params.max_len             = MAX_<%= characteristic.NormalizedName().toUpperCase() %>_LEN;

@@ -53,8 +53,13 @@ if (!_.isNull(FullUuid)) { %>
 #define BLE_<%= ShortName.toUpperCase() %>_BASE_UUID ({<%= FullUuid.UuidBase %>})
 #define BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID (<%= FullUuid.Uuid %>)<%
 } else {%>
-#define BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID (<%= UUID %>)<%
+#define BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID (0x<%= UUID %>)<%
 }%>
+
+<%
+_.each(Characteristics, function(characteristic) { %>
+#define BLE_<%= ShortName.toUpperCase() %>_<%= characteristic.NormalizedName().toUpperCase() %>_CHAR_UUID (<%= characteristic.UUID %>)<%
+});%>
 
 <%
 if(ErrorCodes.length > 0) { %>
