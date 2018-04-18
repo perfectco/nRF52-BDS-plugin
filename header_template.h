@@ -52,14 +52,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 if (!_.isNull(FullUuid)) { %>
 #define BLE_<%= ShortName.toUpperCase() %>_BASE_UUID ({<%= FullUuid.UuidBase %>})
 #define BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID (<%= FullUuid.Uuid %>)<%
+    _.each(Characteristics, function(characteristic) { %>
+#define BLE_<%= ShortName.toUpperCase() %>_<%= characteristic.NormalizedName().toUpperCase() %>_CHAR_UUID (<%= characteristic.getFullUuid().Uuid %>)<%
+    });
 } else {%>
-#define BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID (0x<%= UUID %>)<%
-}%>
-
+#define BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID (0x<%= UUID %>)
 <%
-_.each(Characteristics, function(characteristic) { %>
-#define BLE_<%= ShortName.toUpperCase() %>_<%= characteristic.NormalizedName().toUpperCase() %>_CHAR_UUID (<%= characteristic.UUID %>)<%
-});%>
+    _.each(Characteristics, function(characteristic) { %>
+#define BLE_<%= ShortName.toUpperCase() %>_<%= characteristic.NormalizedName().toUpperCase() %>_CHAR_UUID (0x<%= characteristic.UUID %>)<%
+    });
+}%>
 
 <%
 if(ErrorCodes.length > 0) { %>
