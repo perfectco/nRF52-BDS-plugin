@@ -50,7 +50,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 <%
 if (!_.isNull(FullUuid)) { %>
-#define BLE_<%= ShortName.toUpperCase() %>_BASE_UUID ({<%= FullUuid.UuidBase %>})
+#define BLE_<%= ShortName.toUpperCase() %>_BASE_UUID {<%= FullUuid.UuidBase %>}
 #define BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID (<%= FullUuid.Uuid %>)<%
     _.each(Characteristics, function(characteristic) { %>
 #define BLE_<%= ShortName.toUpperCase() %>_<%= characteristic.NormalizedName().toUpperCase() %>_CHAR_UUID (<%= characteristic.getFullUuid().Uuid %>)<%

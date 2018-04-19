@@ -42,6 +42,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <stdint.h>
 #include "ble.h"
+<%
+_.each(Services, function (service) { %>
+#include "ble_<%= service.ShortName %>.h"<%
+}); %>
 
 <%
 _.each(Services, function (service) { %>
