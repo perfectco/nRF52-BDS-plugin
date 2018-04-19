@@ -49,6 +49,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "char_enc_dec.h"
 
 <%
+if (!_.isNull(FullUuid)) { %>
+#define BLE_<%= ShortName.toUpperCase() %>_BASE_UUID {<%= FullUuid.UuidBase %>}
+#define BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID (<%= FullUuid.Uuid %>)<%
+    _.each(Characteristics, function(characteristic) { %>
+#define BLE_<%= ShortName.toUpperCase() %>_<%= characteristic.NormalizedName().toUpperCase() %>_CHAR_UUID (<%= characteristic.getFullUuid().Uuid %>)<%
+    });
+} else {%>
+#define BLE_<%= ShortName.toUpperCase() %>_SERVICE_UUID (0x<%= UUID %>)
+<%
+    _.each(Characteristics, function(characteristic) { %>
+#define BLE_<%= ShortName.toUpperCase() %>_<%= characteristic.NormalizedName().toUpperCase() %>_CHAR_UUID (0x<%= characteristic.UUID %>)<%
+    });
+}%>
+
+<%
 if(ErrorCodes.length > 0) { %>
 // Error codes <%
     _.each(ErrorCodes, function(errCode) { %>
@@ -231,6 +246,10 @@ _.each(Characteristics, function(characteristic) {
     }});
 }); %>
     uint16_t conn_handle; /**< Handle of the current connection (as provided by the BLE stack, is BLE_CONN_HANDLE_INVALID if not in a connection). */
+    <%
+        if (!_.isNull(FullUuid)) { %>
+    ble_uuid_t uuid; /* type of UUID for the base service UUID */<%
+        }%>
 };
 
 /**@brief Function for initializing the <%= Name %>.
