@@ -673,7 +673,7 @@ uint32_t ble_<%= ShortName %>_init(ble_<%= ShortName %>_t * p_<%= ShortName %>, 
 
     /* YOUR_JOB: Setup Characteristic User Description below */
     ble_add_char_user_desc_t <%= characteristic.NormalizedName() %>_<%= descriptor.NormalizedName() %>;
-    uint8_t <%= characteristic.NormalizedName() %>_<%= descriptor.NormalizedName() %>_val[]  = {'b', 'd', 's' };
+    uint8_t <%= characteristic.NormalizedName() %>_<%= descriptor.NormalizedName() %>_val[]    = "<%= characteristic.Name %>";
     memset(&<%= characteristic.NormalizedName() %>_<%= descriptor.NormalizedName() %>, 0, sizeof(<%= characteristic.NormalizedName() %>_<%= descriptor.NormalizedName() %>));
     <%= characteristic.NormalizedName() %>_<%= descriptor.NormalizedName() %>.read_access      = SEC_OPEN;
     <%= characteristic.NormalizedName() %>_<%= descriptor.NormalizedName() %>.write_access     = SEC_NO_ACCESS;
